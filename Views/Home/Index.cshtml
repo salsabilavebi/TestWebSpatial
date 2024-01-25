@@ -1,0 +1,61 @@
+﻿@page
+@{
+    }
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+<body>
+
+    <!-- Kontainer peta -->
+    <div id="map" ></div>
+
+    <script>
+        
+        var map = L.map('map').setView([0, 0], 2);
+
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+       
+        map.on('click', function (e) {
+            
+            console.log('Klik pada koordinat:', e.latlng);
+            $('#tambahDataModal').modal('show');
+            $('#dataInput').val(e.latlng.toString());
+        });
+    </script>
+   
+   
+
+</body>
+</html>
+
+<div class="modal fade" id="tambahDataModal" tabindex="-1" role="dialog" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data Baru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Tambahkan elemen-elemen form di sini -->
+                <!-- Contoh: -->
+                <form id="formTambahData">
+                    <label for="dataInput">Data:</label>
+                    <input type="text" id="dataInput" name="dataInput" required>
+                    <!-- Tambahkan elemen form lainnya -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary" onclick="simpanData()">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
